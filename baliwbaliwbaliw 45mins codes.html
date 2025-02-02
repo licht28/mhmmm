@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raven Squarepants</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffdde1, #ff9a8b);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Floating hearts animation */
+        .heart {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background-color: #ff4b5c;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation: floatHearts 5s infinite;
+        }
+
+        .heart:nth-child(odd) {
+            animation-duration: 6s;
+        }
+
+        .heart:nth-child(even) {
+            animation-duration: 8s;
+        }
+
+        /* Floating heart movement */
+        @keyframes floatHearts {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-100vh) rotate(180deg);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        /* Gradient background animation */
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Container styles */
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 400px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+            z-index: 1;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff4b5c;
+            animation: slideIn 1s ease-in-out;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #confessionText {
+            font-size: 16px;
+            color: #444;
+            white-space: pre-wrap;
+            overflow: hidden;
+            border-right: 2px solid #ff4b5c;
+            display: inline-block;
+            animation: typing 4s steps(100) forwards, blink 0.7s infinite;
+            font-family: 'Courier New', monospace;
+        }
+
+        button {
+            background-color: #ff4b5c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 250px;
+        }
+
+        button:hover {
+            background-color: #e63950;
+            transform: scale(1.1);
+        }
+
+        /* Extra cuteness for buttons */
+        button:active {
+            transform: scale(1);
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -55%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container" id="quizContainer">
+        <h1>Hi loveeee</h1>
+        <p>This is a pop quiz for future events. Do you give consent to answer this quiz? (If Yes, Make sure to record your reaction sa pag open ng aking mabilisang coding for u my love)</p>
+        <button onclick="consent(true)">Yes</button>
+        <button onclick="consent(false)">No</button>
+    </div>
+
+    <div class="container" id="confessionContainer" style="display: none;">
+        <h1>ITO NA NGA</h1>
+        <p id="confessionText"></p>
+        <button onclick="askQuestion()">Next</button>
+    </div>
+
+    <!-- Floating Hearts -->
+    <div class="heart" style="top: 30%; left: 10%;"></div>
+    <div class="heart" style="top: 50%; left: 70%;"></div>
+    <div class="heart" style="top: 10%; left: 30%;"></div>
+    <div class="heart" style="top: 40%; left: 80%;"></div>
+
+    <script>
+        function consent(answer) {
+            if (answer) {
+                document.getElementById("quizContainer").style.display = "none";
+                document.getElementById("confessionContainer").style.display = "block";
+                typeText();
+            } else {
+                window.close();
+            }
+        }
+
+        function typeText() {
+            const text = "But before that, I just wanted to say how happy I am that we met. Us getting along means the world to me, isipin mo someone so delicate ay binababy lang ako shet talagaaaa. Pero ayun, the purpose of this prompt is to officially confess to you, Raven. I like you a lot. Not just by your looks, your attitude, the privilege na nakukuha ko pag magkasama tayo, but for your who you are. I hope that you are aware kung gano mo ako napapasaya. Dahil don di ako nagsasawa mag effort, because napaparamdam mo sakin na you are worth every mile that I walk and go through. Kung sino man nagsayang sayo, minalas yon HAHAHHAHAH di niya na-appreciate kung gaano ka ka-delicate and sweet. Ik it's too early to say, pero maging sino ka man, you will always be understood and appreciated as long as you are with me. AND WITH THATTTT (click next)";
+            let i = 0;
+            const speed = 30;
+            const confessionText = document.getElementById("confessionText");
+            function typeWriter() {
+                if (i < text.length) {
+                    confessionText.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+            }
+            typeWriter();
+        }
+
+        function askQuestion() {
+            document.getElementById("confessionContainer").innerHTML = `
+                <h1>Beri Important Question</h1>
+                <p>Will you be my valentine, Raven Anne? 💕</p>
+                <button onclick="revealMessage()">Yes</button>
+                <button onclick="closeWindow()">No (Not working)</button>
+            `;
+        }
+
+        function closeWindow() {
+            window.close();
+        }
+
+        function revealMessage() {
+            document.getElementById("confessionContainer").innerHTML = "<h1>Yippeeeee!!!</h1><p>See you, My Valentineee (make sure to send ur screenshot of u saying yessss)</p>";
+        }
+    </script>
+</body>
+</html>
